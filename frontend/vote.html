@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting - PEMILU UKMR 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Latar belakang & Efek */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(rgba(183, 219, 104, 0.75), rgba(0, 0, 0, 0.75)), url('images/IMG_1308.JPEG');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #group {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col items-center py-16 px-4 relative">
+  <div id="group"></div>
+
+  <div class="relative z-10 w-full max-w-6xl flex flex-col items-center">
+    
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-6xl font-unbounded font-bold text-[#D8F878] mb-4">PEMILU UKMR 2026</h1>
+      <p class="text-[#F0EFEB] text-lg font-poppins opacity-90">Pilih Nakhoda Unit Kebudayaan Melayu Riau dengan bijak</p>
+      
+      <div id="countdown" class="mt-6 text-2xl md:text-3xl font-bold text-[#332277] bg-[#D8F878] px-8 py-4 rounded-full inline-block shadow-xl"></div>
+    </div>
+
+    <div id="kandidatContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+      </div>
+
+    <footer class="mt-20 text-[#F0EFEB]/60 text-sm font-poppins">
+      © 2026 UKMR - Institut Teknologi Bandung.
+    </footer>
+  </div>
+
+  <script>
+    // === Countdown Timer ===
+    const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date('August 16, 2026 07:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance <= 0) {
+        countdownElement.textContent = 'Waktu Pemilihan Telah Berakhir';
+        return;
+      }
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownElement.textContent = `${d.toString().padStart(2,'0')} : ${h.toString().padStart(2,'0')} : ${m.toString().padStart(2,'0')} : ${s.toString().padStart(2,'0')}`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // === Efek Kotak Statik ===
+    const group = document.getElementById("group");
+    function createStaticSquares() {
+      group.innerHTML = "";
+      const sSize = 60;
+      const total = Math.ceil(window.innerWidth / sSize) + 1;
+      for (let i = 0; i < total; i++) {
+        const sq1 = document.createElement("div"); sq1.className = "square";
+        sq1.style.width = sSize + "px"; sq1.style.height = sSize + "px";
+        sq1.style.left = (i * sSize) + "px"; sq1.style.top = (i % 2 === 0 ? window.innerHeight - 120 : window.innerHeight - 60) + "px";
+        group.appendChild(sq1);
+        const sq2 = document.createElement("div"); sq2.className = "square";
+        sq2.style.width = sSize + "px"; sq2.style.height = sSize + "px";
+        sq2.style.left = (i * sSize) + "px"; sq2.style.top = (i % 2 === 0 ? 0 : 60) + "px";
+        group.appendChild(sq2);
+      }
+    }
+    createStaticSquares();
+    window.addEventListener("resize", createStaticSquares);
+  </script>
+  <script defer src="vote.js"></script>
+</body>
+</html>

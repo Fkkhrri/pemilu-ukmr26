@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin - PEMILU UKMR</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh; 
+      overflow-x: hidden;
+      /* Background konsisten dengan halaman sebelumnya */
+      background: linear-gradient(rgba(183, 219, 104, 0.7), rgba(0, 0, 0, 0.75)), url('images/IMG_1308.JPEG');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    #group {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen px-4 py-24 relative">
+
+  <div id="group"></div>
+
+  <nav class="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center p-2 bg-[#332277] rounded-full shadow-lg whitespace-nowrap">
+      <a href="index.html" class="px-5 py-2 rounded-full flex justify-center items-center hover:bg-[#E47CB8] transition-colors group">
+          <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none group-hover:text-[#001C3D]">← Kembali</span>
+      </a>
+  </nav>
+
+  <div class="relative z-10 w-full max-w-md flex flex-col items-center gap-8">
+      
+      <div class="flex flex-col items-center gap-4 w-full">
+          <img src="images/logo bg transparent.png" alt="Logo UKMR" 
+               class="w-[140px] h-[140px] md:w-[180px] md:h-[180px] object-cover">
+          
+          <img src="images/Pemilu U KMR 2 026.png" alt="Judul Pemilu UKMR 2026" 
+               class="w-[85%] max-w-[320px] md:max-w-[400px] object-contain">
+      </div>
+
+      <div class="w-full bg-[#F0EFEB] rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col gap-6 transform transition-all duration-300 hover:shadow-[0_0_30px_rgba(216,248,120,0.3)]">
+          
+          <h2 class="text-[#332277] text-2xl md:text-3xl font-poppins font-extrabold text-center leading-tight">
+              Login Admin
+          </h2>
+
+          <form id="adminLoginForm" class="flex flex-col gap-5">
+              
+              <div class="flex flex-col gap-2">
+                  <input type="text" id="username" placeholder="Masukkan Username" required
+                         class="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-[#001C3D] font-poppins text-base outline-none focus:border-[#9448B0] focus:ring-2 focus:ring-[#E47CB8]/50 transition-all">
+              </div>
+
+              <div class="flex flex-col gap-2">
+                  <input type="password" id="password" placeholder="Masukkan Password" required
+                         class="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-[#001C3D] font-poppins text-base outline-none focus:border-[#9448B0] focus:ring-2 focus:ring-[#E47CB8]/50 transition-all">
+              </div>
+
+              <button type="submit" 
+                      class="w-full mt-2 py-4 rounded-xl bg-gradient-to-r from-[#332277] to-[#9448B0] text-white hover:from-[#D8F878] hover:to-[#E47CB8] hover:text-[#001C3D] font-poppins font-bold text-[20px] shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                  Login
+              </button>
+
+          </form>
+
+          <p id="error" class="text-red-500 font-poppins font-semibold text-center text-sm hidden bg-red-100 py-2 rounded-lg border border-red-200">
+              Username atau password salah!
+          </p>
+      </div>
+
+  </div>
+
+  <script>
+    const group = document.getElementById("group");
+    function createStaticSquares() {
+      group.innerHTML = "";
+      const squareSize = 60;
+      const totalSquares = Math.ceil(window.innerWidth / squareSize) + 1;
+
+      for (let i = 0; i < totalSquares; i++) {
+        const square = document.createElement("div");
+        square.className = "square";
+        square.style.width = squareSize + "px";
+        square.style.height = squareSize + "px";
+        square.style.left = i * squareSize + "px";
+        square.style.top = (i % 2 === 0) ? (window.innerHeight - 120) + "px" : (window.innerHeight - 60) + "px";
+        group.appendChild(square);
+      }
+      
+      for (let i = 0; i < totalSquares; i++) {
+        const square = document.createElement("div");
+        square.className = "square";
+        square.style.width = squareSize + "px";
+        square.style.height = squareSize + "px";
+        square.style.left = i * squareSize + "px";
+        square.style.top = (i % 2 === 0) ? "0px" : "60px";
+        group.appendChild(square);
+      }
+    }
+    
+    createStaticSquares();
+    window.addEventListener("resize", createStaticSquares);
+  </script>
+
+  <script src="admin-login.js"></script>
+</body>
+</html>
