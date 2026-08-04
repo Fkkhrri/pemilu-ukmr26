@@ -65,10 +65,13 @@ function renderCandidates(candidates) {
     // ==========================================
     else {
       card.className = 'bg-[#F0EFEB] rounded-[40px] p-8 shadow-2xl flex flex-col items-center text-center transition-transform hover:scale-105 border border-white/20 mt-8 w-[300px] md:w-[350px]';
-      
+
       card.innerHTML = `
         <div class="w-32 h-32 md:w-40 md:h-40 mb-8 border-4 border-[#9448B0] rounded-full overflow-hidden shadow-lg bg-gray-200">
-          <img src="${c.foto_url || 'images/IMG_7093.JPG'}" alt="${c.nama}" class="w-full h-full object-cover">
+          <img src="${c.foto_url || 'images/IMG_7093.JPG'}" 
+              onerror="this.onerror=null; this.src='images/IMG_7093.JPG';" 
+              alt="${c.nama}" 
+              class="w-full h-full object-cover">
         </div>
 
         <h3 class="text-[#332277] text-2xl font-bold font-poppins mb-2">${c.nama}</h3>
