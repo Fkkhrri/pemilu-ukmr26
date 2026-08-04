@@ -150,14 +150,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('user_token');
 
     try {
-      const res = await fetch('http://localhost:3000/api/vote', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({ candidate_id })
-      });
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nim, password })
+    });
 
       if (res.ok) {
         alert('Voting berhasil! Terima kasih sudah berpartisipasi.');

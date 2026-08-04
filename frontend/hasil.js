@@ -89,7 +89,7 @@ async function jalankanProsesBukaHasil() {
 // Fungsi terhubung ke Endpoint Backend
 async function fetchHasilVotingFromBackend() {
   try {
-    const res = await fetch('http://localhost:3000/api/public/results');
+    const res = await fetch('/api/public/results');
     if (!res.ok) throw new Error('Gagal memuat hasil dari server');
     
     const data = await res.json();

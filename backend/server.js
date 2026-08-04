@@ -263,4 +263,9 @@ app.get('/api/public/results', async (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running locally on port ${PORT}`));
+}
+
 module.exports = app;

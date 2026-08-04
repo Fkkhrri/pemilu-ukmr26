@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         // Mengirim data ke backend lokal Anda
-        const res = await fetch('http://localhost:3000/api/admin/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
 
         // Jika backend merespon error (misal: password salah)
         if (!res.ok) {
