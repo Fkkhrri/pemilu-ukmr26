@@ -7,7 +7,7 @@ async function fetchCandidates() {
   const token = localStorage.getItem('user_token'); // Menyesuaikan token pemilih mahasiswa Anda sebelumnya
   
   try {
-    const res = await fetch('http://localhost:3000/api/candidates', {
+    const res = await fetch('/api/candidates', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     if (!res.ok) throw new Error('Gagal ambil data');
