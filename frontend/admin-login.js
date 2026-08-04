@@ -1,20 +1,48 @@
-document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+// Tunggu sampai seluruh HTML selesai dimuat
+document.addEventListener('DOMContentLoaded', () => {
+  
+  const loginForm = document.getElementById('adminLoginForm');
+  const errorElement = document.getElementById('error');
 
-  try {
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+  // Pastikan form ditemukan sebelum menambahkan event listener
+  if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Mencegah halaman ter-refresh otomatis!
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        // Mengirim data ke backend lokal Anda
+        const res = await fetch('http://localhost:3000/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        // Jika backend merespon error (misal: password salah)
+        if (!res.ok) {
+          throw new Error('Login gagal');
+        }
+
+        // Jika sukses, ambil token dari backend
+        const data = await res.json();
+        
+        // Simpan token ke memori browser
+        localStorage.setItem('admin_token', data.token); 
+        
+        // Arahkan ke dashboard admin
+        window.location.href = 'admin.html';
+        
+      } catch(error) {
+        console.error("Login Error:", error);
+        // Munculkan tulisan merah di bawah form
+        if (errorElement) {
+          errorElement.classList.remove('hidden');
+        }
+      }
     });
-    if (!res.ok) throw new Error('Login gagal');
-    const { token } = await res.json();
-    localStorage.setItem('token', token);
-    window.location.href = 'admin.html'; // Arahkan ke dashboard admin
-  } catch(error) {
-    document.getElementById('error').classList.remove('hidden');
-    console.error(error);
+  } else {
+    console.error("Form 'adminLoginForm' tidak ditemukan di HTML.");
   }
 });

@@ -22,7 +22,7 @@
       min-height: 100vh; 
       overflow-x: hidden;
       /* Background konsisten dengan halaman sebelumnya */
-      background: linear-gradient(rgba(183, 219, 104, 0.8), rgba(0, 0, 0, 0.8)), url('images/IMG_1308.JPEG');
+      background: linear-gradient(rgba(183, 219, 104, 0.4), rgba(0, 0, 0, 0.9)), url('images/IMG_1308.JPEG');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -64,7 +64,8 @@
                   Status Partisipasi Pemilih
               </h2>
               <div class="w-full flex justify-center">
-                  <canvas id="totalVoterChart" class="max-w-[300px] w-full"></canvas>
+                  <div class="w-full flex justify-center h-[300px]"> <canvas id="totalVoterChart"></canvas>
+                </div>
               </div>
           </div>
 
@@ -73,7 +74,8 @@
                   Perolehan Suara Kandidat
               </h2>
               <div class="w-full flex justify-center">
-                  <canvas id="candidateChart" class="max-w-[300px] w-full"></canvas>
+                  <div class="w-full flex justify-center h-[300px]"> <canvas id="candidateChart"></canvas>
+                </div>
               </div>
           </div>
 

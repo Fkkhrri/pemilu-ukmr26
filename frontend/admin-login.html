@@ -7,6 +7,15 @@
   
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Unbounded:wght@500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Inisialisasi Global
+  const supabase = supabase.createClient('https://kburaeetsmztnwbiakpu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidXJhZWV0c216dG53Ymlha3B1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNzE1MjksImV4cCI6MjA5Njg0NzUyOX0.BGjutIr0fazyOfOfPBYE8B_VNfDWHBSuYWq4-xaVmeI');
+</script>
+
+  <script src="admin-login.js"></script>
   
   <style>
     body {
@@ -14,7 +23,7 @@
       min-height: 100vh; 
       overflow-x: hidden;
       /* Background konsisten dengan halaman sebelumnya */
-      background: linear-gradient(rgba(183, 219, 104, 0.7), rgba(0, 0, 0, 0.75)), url('images/IMG_1308.JPEG');
+      background: linear-gradient(rgba(183, 219, 104, 0.4), rgba(0, 0, 0, 0.9)), url('images/IMG_1308.JPEG');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -118,6 +127,5 @@
     window.addEventListener("resize", createStaticSquares);
   </script>
 
-  <script src="admin-login.js"></script>
 </body>
 </html>
