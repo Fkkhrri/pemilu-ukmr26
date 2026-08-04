@@ -138,35 +138,48 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // === Aksi Kirim Suara (Voting) ===
   container.addEventListener('click', async e => {
-    if (!e.target.matches('.voteBtn')) return;
+    // Ambil elemen tombol yang diklik (mencakup jika mengeklik teks di dalam tombol)
+    const btn = e.target.closest('.voteBtn');
+    if (!btn) return;
     
     // PARSE MENJADI INTEGER (Angka)
-    const candidate_id = parseInt(e.target.dataset.id, 10);
+    const candidate_id = parseInt(btn.dataset.id, 10);
     
     if (isNaN(candidate_id)) {
       alert('ID Kandidat tidak valid!');
       return;
     }
 
+    // Cek apakah user sudah login & memiliki token
+    const token = localStorage.getItem('user_token');
+    if (!token) {
+      alert('Sesi login telah berakhir. Silakan login kembali.');
+      window.location.href = 'login.html';
+      return;
+    }
+
     if (!confirm('Yakin memilih kandidat ini? Pilihan Anda tidak dapat diubah kembali.')) return;
 
-    const token = localStorage.getItem('user_token');
-
     try {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ nim, password })
-    });
+      // Panggil Endpoint API Voting
+      const res = await fetch('/api/vote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Mengirimkan token bukti login user
+        },
+        body: JSON.stringify({ 
+          candidate_id: candidate_id 
+        })
+      });
+
+      const data = await res.json();
 
       if (res.ok) {
         alert('Voting berhasil! Terima kasih sudah berpartisipasi.');
         window.location.href = 'thankyou.html';
       } else {
-        const { message } = await res.json();
-        alert('Gagal: ' + message);
+        alert('Gagal: ' + (data.message || 'Gagal mengirimkan suara.'));
       }
     } catch (err) {
       console.error("Error Network:", err);
