@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         // Mengirim data ke backend lokal Anda
-      const res = await fetch('/api/login', {
+      const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
