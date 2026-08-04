@@ -34,44 +34,65 @@
 <body class="flex flex-col items-center pt-28 pb-10 px-4 relative">
 
  <!-- MENU NAVIGASI -->
-<nav class="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center p-2 bg-[#332277] rounded-full shadow-lg whitespace-nowrap gap-1">
-    <!-- Home (Tombol Aktif Pink #E47CB8) -->
-    <a href="index.html" class="px-5 py-2 md:px-6 md:py-2 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
-        <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none">Home</span>
-    </a>
+<nav class="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-50 flex items-start justify-between pointer-events-none">
+  
+  <!-- CONTAINER BAR UNGU (Home, Profil, Hasil, Helpdesk) -->
+  <div class="bg-[#332277] rounded-2xl md:rounded-full shadow-lg p-2 md:p-1.5 transition-all duration-300 pointer-events-auto w-full md:w-auto">
     
-    <!-- Profil Kandidat -->
-    <a href="profil.html" class="px-4 py-2 md:px-6 md:py-2 bg-[#E47CB8] rounded-full flex justify-center items-center transition-colors">
-        <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none">Profil Kandidat</span>
-    </a>
-    
-    <!-- Hasil -->
-    <a href="hasil.html" class="px-4 py-2 md:px-6 md:py-2 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
-        <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none">Hasil</span>
-    </a>
-
-    <!-- Menu Helpdesk (Membuka Spreadsheet di Tab Baru) -->
-    <a href="https://docs.google.com/spreadsheets/d/1rsIvVv4W07cywiBLITD6IyNFMIIVMXzHTRx2HSC77Q4/edit?usp=sharing" 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="px-4 py-2 md:px-6 md:py-2 rounded-full flex justify-center items-center gap-1.5 hover:bg-white/10 transition-colors">
-        <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none">Helpdesk</span>
-        <!-- Icon Eksternal Link -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 md:h-4 md:w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    <!-- TAMPILAN MOBILE (HP) -->
+    <div class="flex items-center justify-between w-full md:hidden px-2 py-1">
+      <!-- Tombol Garis 3 (Kiri) -->
+      <button id="menu-toggle" class="text-white focus:outline-none p-1.5 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle Menu">
+        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
-    </a>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Nama Halaman Aktif (Kanan) -->
+      <span class="text-[#FFFFFF] font-poppins font-extrabold text-sm tracking-wide uppercase">
+        Profil Kandidat
+      </span>
+    </div>
+
+    <!-- DAFTAR MENU UTAMA -->
+    <div id="menu-list" class="hidden md:flex flex-col md:flex-row items-stretch md:items-center gap-1 mt-3 md:mt-0 pt-2 md:pt-0 border-t border-white/10 md:border-none">
+      
+      <a href="index.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
+        <span class="text-white text-sm md:text-base font-bold font-poppins">Home</span>
+      </a>
+
+      <a href="profil.html" class="px-4 py-2 bg-[#E47CB8] rounded-xl md:rounded-full flex justify-start md:justify-center items-center transition-colors">
+        <span class="text-white text-sm md:text-base font-bold font-poppins">Profil Kandidat</span>
+      </a>
+
+      <a href="hasil.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
+        <span class="text-white text-sm md:text-base font-bold font-poppins">Hasil</span>
+      </a>
+
+      <!-- HELPDESK (Direct ke Spreadsheet) -->
+      <a href="https://docs.google.com/spreadsheets/d/1rsIvVv4W07cywiBLITD6IyNFMIIVMXzHTRx2HSC77Q4/edit?hl=id&gid=0#gid=0" target="_blank" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors text-[#FFFFFF]">
+        <span class="text-sm md:text-base font-bold font-poppins">Helpdesk</span>
+      </a>
+
+      <!-- MENU LOGIN (Hanya Tampil di Dalam Garis 3 saat Layar HP) -->
+      <a href="login.html" class="md:hidden px-4 py-2 rounded-xl flex justify-start items-center hover:bg-white/10 transition-colors border border-white/20 mt-2 bg-white/5">
+        <span class="text-white text-sm font-bold font-poppins">Login</span>
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- TOMBOL LOGIN TERPISAH (Hanya Tampil di Kanan Atas PC) -->
+  <a href="login.html" class="hidden md:flex pointer-events-auto bg-[#332277] hover:bg-[#9448B0] text-white px-6 py-2.5 rounded-full shadow-lg border border-white/20 transition-all duration-300 hover:scale-105 items-center justify-center">
+    <span class="text-sm md:text-base font-bold font-poppins">Login</span>
+  </a>
+
 </nav>
 
-<!-- TOMBOL LOGIN (Terpisah di Pojok Kanan Atas) -->
-<a href="login.html" class="fixed top-4 right-4 md:top-8 md:right-8 z-50 flex items-center gap-2 px-4 py-2 bg-[#332277] border border-[#9448B0] rounded-full shadow-lg hover:bg-[#D8F878] transition-colors group cursor-pointer">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-[#D8F878] group-hover:text-[#001C3D] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-    </svg>
-    <span class="text-[#F0EFEB] group-hover:text-[#001C3D] text-[12px] md:text-[14px] font-bold font-poppins leading-none transition-colors">
-        Login
-    </span>
-</a>
 
   <div class="relative z-10 w-full max-w-5xl flex flex-col gap-24 mt-8">
     
@@ -171,5 +192,18 @@
     </footer>
 
   </div>
+  <script>
+    // Toggle menu untuk tampilan mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuList = document.getElementById('menu-list');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
+    menuToggle.addEventListener('click', () => {
+      menuList.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
