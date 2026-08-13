@@ -112,7 +112,6 @@
 </head>
 <body class="flex flex-col items-center min-h-screen px-4 py-16 relative">
 
-  <!-- SCREEN AMPLOP & COUNTDOWN -->
   <div id="envelope-screen">
     <div class="mb-6 text-center px-4">
       <h2 id="envelope-title" class="text-[#D8F878] font-poppins font-bold text-2xl md:text-3xl animate-pulse">
@@ -126,85 +125,76 @@
     <div class="envelope mt-4">
       <div id="envelope-flap" class="flap"></div>
       <div id="envelope-letter" class="letter">
-        <img src="images/logo bg transparent.png" class="w-16 h-16 mb-2" alt="Logo">
+        <img src="images/logo bg transparent.png" class="w-16 h-16 mb-2" alt="Logo" onerror="this.style.display='none'">
         <span class="font-poppins text-sm font-extrabold text-[#332277]">HASIL PEMILU</span>
       </div>
       <div class="envelope-front"></div>
     </div>
 
-    <!-- BOX COUNTDOWN (Tampil saat sebelum 17 Agt 06.00) -->
-    <div id="countdown-box" class="mt-10 hidden flex-col items-center">
+    <div id="countdown-box" class="mt-8 hidden flex-col items-center">
       <span class="text-gray-300 font-poppins text-xs uppercase tracking-widest mb-2">Hasil Dibuka Dalam:</span>
       <div id="countdown-timer" class="font-unbounded font-black text-xl md:text-3xl text-[#D8F878] bg-[#332277]/80 px-6 py-3 rounded-2xl border border-[#9448B0] shadow-lg">
         00d : 00h : 00m : 00s
       </div>
+
+      <a href="index.html" class="mt-6 inline-flex items-center gap-2 bg-[#E47CB8] hover:bg-[#9448B0] text-white font-poppins font-bold text-sm px-6 py-2.5 rounded-full shadow-lg border border-white/20 transition-all hover:scale-105">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Kembali ke Beranda
+      </a>
     </div>
   </div>
 
-  <!-- MENU NAVIGASI -->
-<nav class="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-50 flex items-start justify-between pointer-events-none">
-  
-  <!-- CONTAINER BAR UNGU (Home, Profil, Hasil, Helpdesk) -->
-  <div class="bg-[#332277] rounded-2xl md:rounded-full shadow-lg p-2 md:p-1.5 transition-all duration-300 pointer-events-auto w-full md:w-auto">
-    
-    <!-- TAMPILAN MOBILE (HP) -->
-    <div class="flex items-center justify-between w-full md:hidden px-2 py-1">
-      <!-- Tombol Garis 3 (Kiri) -->
-      <button id="menu-toggle" class="text-white focus:outline-none p-1.5 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle Menu">
-        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-
-      <!-- Nama Halaman Aktif (Kanan) -->
-      <span class="text-[#FFFFFF] font-poppins font-extrabold text-sm tracking-wide uppercase">
-        Hasil
-      </span>
-    </div>
-
-    <!-- DAFTAR MENU UTAMA -->
-    <div id="menu-list" class="hidden md:flex flex-col md:flex-row items-stretch md:items-center gap-1 mt-3 md:mt-0 pt-2 md:pt-0 border-t border-white/10 md:border-none">
+  <nav class="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-50 flex items-start justify-between pointer-events-none">
+    <div class="bg-[#332277] rounded-2xl md:rounded-full shadow-lg p-2 md:p-1.5 transition-all duration-300 pointer-events-auto w-full md:w-auto">
       
-      <a href="index.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
-        <span class="text-white text-sm md:text-base font-bold font-poppins">Home</span>
-      </a>
+      <div class="flex items-center justify-between w-full md:hidden px-2 py-1">
+        <button id="menu-toggle" class="text-white focus:outline-none p-1.5 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle Menu">
+          <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
 
-      <a href="profil.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
-        <span class="text-white text-sm md:text-base font-bold font-poppins">Profil Kandidat</span>
-      </a>
+        <span class="text-[#FFFFFF] font-poppins font-extrabold text-sm tracking-wide uppercase">
+          Hasil
+        </span>
+      </div>
 
-      <a href="hasil.html" class="px-4 py-2 bg-[#E47CB8] rounded-xl md:rounded-full flex justify-start md:justify-center items-center transition-colors">
-        <span class="text-white text-sm md:text-base font-bold font-poppins">Hasil</span>
-      </a>
+      <div id="menu-list" class="hidden md:flex flex-col md:flex-row items-stretch md:items-center gap-1 mt-3 md:mt-0 pt-2 md:pt-0 border-t border-white/10 md:border-none">
+        <a href="index.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
+          <span class="text-white text-sm md:text-base font-bold font-poppins">Home</span>
+        </a>
 
-      <!-- HELPDESK (Direct ke Spreadsheet) -->
-      <a href="https://docs.google.com/spreadsheets/d/1rsIvVv4W07cywiBLITD6IyNFMIIVMXzHTRx2HSC77Q4/edit?hl=id&gid=0#gid=0" target="_blank" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors text-[#FFFFFF]">
-        <span class="text-sm md:text-base font-bold font-poppins">Helpdesk</span>
-      </a>
+        <a href="profil.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
+          <span class="text-white text-sm md:text-base font-bold font-poppins">Profil Kandidat</span>
+        </a>
 
-      <!-- MENU LOGIN (Hanya Tampil di Dalam Garis 3 saat Layar HP) -->
-      <a href="login.html" class="md:hidden px-4 py-2 rounded-xl flex justify-start items-center hover:bg-white/10 transition-colors border border-white/20 mt-2 bg-white/5">
-        <span class="text-white text-sm font-bold font-poppins">Login</span>
-      </a>
+        <a href="hasil.html" class="px-4 py-2 bg-[#E47CB8] rounded-xl md:rounded-full flex justify-start md:justify-center items-center transition-colors">
+          <span class="text-white text-sm md:text-base font-bold font-poppins">Hasil</span>
+        </a>
+
+        <a href="https://docs.google.com/spreadsheets/d/1rsIvVv4W07cywiBLITD6IyNFMIIVMXzHTRx2HSC77Q4/edit?hl=id&gid=0#gid=0" target="_blank" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors text-[#FFFFFF]">
+          <span class="text-sm md:text-base font-bold font-poppins">Helpdesk</span>
+        </a>
+
+        <a href="login.html" class="md:hidden px-4 py-2 rounded-xl flex justify-start items-center hover:bg-white/10 transition-colors border border-white/20 mt-2 bg-white/5">
+          <span class="text-white text-sm font-bold font-poppins">Login</span>
+        </a>
+      </div>
 
     </div>
 
-  </div>
+    <a href="login.html" class="hidden md:flex pointer-events-auto bg-[#332277] hover:bg-[#9448B0] text-white px-6 py-2.5 rounded-full shadow-lg border border-white/20 transition-all duration-300 hover:scale-105 items-center justify-center">
+      <span class="text-sm md:text-base font-bold font-poppins">Login</span>
+    </a>
+  </nav>
 
-  <!-- TOMBOL LOGIN TERPISAH (Hanya Tampil di Kanan Atas PC) -->
-  <a href="login.html" class="hidden md:flex pointer-events-auto bg-[#332277] hover:bg-[#9448B0] text-white px-6 py-2.5 rounded-full shadow-lg border border-white/20 transition-all duration-300 hover:scale-105 items-center justify-center">
-    <span class="text-sm md:text-base font-bold font-poppins">Login</span>
-  </a>
-
-</nav>
-
-  <!-- KONTEN UTAMA HASIL VOTING -->
   <div id="main-content" class="relative z-10 w-full max-w-5xl hidden flex-col items-center gap-8 opacity-0 mt-8">
     
-    <!-- HEADER -->
     <div class="text-center bg-[#F0EFEB]/90 backdrop-blur-md px-10 py-6 rounded-3xl shadow-2xl border-b-4 border-[#D8F878]">
       <h1 class="text-[#E94F37] font-poppins font-black text-2xl md:text-4xl tracking-wide uppercase drop-shadow-sm">
         Hasil Voting
@@ -214,38 +204,52 @@
       </p>
     </div>
 
-    <!-- GRID KANDIDAT -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto md:translate-x-6 lg:translate-x-12 justify-center items-stretch my-auto"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto justify-center items-stretch my-auto">
       
-      <!-- KANDIDAT 01: KHAIRUL ARIEF RAHMAN -->
-      <div class="relative bg-gradient-to-b from-[#D8F878] to-white rounded-[30px] p-6 shadow-2xl flex flex-col items-center text-center transform hover:-translate-y-2 transition-all border-4 border-[#D8F878] mt-4">
-        <div class="w-32 h-32 rounded-full border-4 border-[#332277] overflow-hidden mt-4 shadow-lg bg-gray-200">
-          <img src="images/IMG_7093.JPG" alt="Khairul Arief Rahman" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150'">
+      <div class="relative bg-gradient-to-b from-[#D8F878] to-white rounded-[30px] p-6 shadow-2xl flex flex-col items-center justify-between text-center transform hover:-translate-y-2 transition-all border-4 border-[#D8F878] w-full min-h-[380px]">
+        <div class="flex flex-col items-center w-full">
+          <div class="w-28 h-28 rounded-full border-4 border-[#332277] overflow-hidden mt-2 shadow-lg bg-gray-200">
+            <img src="images/IMG_7093.JPG" alt="Khairul Arief Rahman" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150'">
+          </div>
+          <span class="bg-[#332277] text-white font-poppins font-bold text-xs px-4 py-1 rounded-full -mt-3 z-10">Kandidat 01</span>
+          <h2 class="mt-3 font-poppins font-bold text-lg md:text-xl text-[#332277]">Khairul Arief Rahman<br><span class="text-sm font-medium">(Perubahan)</span></h2>
+          <div class="my-3 w-full h-[1px] bg-[#332277]/20"></div>
         </div>
-        <span class="bg-[#332277] text-white font-poppins font-bold text-xs px-4 py-1 rounded-full -mt-4 z-10">Kandidat 01</span>
-        <h2 class="mt-4 font-poppins font-bold text-xl text-[#332277]">Khairul Arief Rahman<br><span class="text-sm font-medium">(Perubahan)</span></h2>
-        <div class="my-4 w-full h-[1px] bg-[#332277]/20"></div>
-        <div id="persen-2" class="font-poppins font-black text-5xl text-[#332277]">0%</div>
-        <p id="suara-2" class="font-poppins text-xs font-bold text-gray-500 mt-1 uppercase">MENGHITUNG...</p>
+        
+        <div class="w-full pb-2">
+          <div id="persen-2" class="font-poppins font-black text-4xl md:text-5xl text-[#332277]">0%</div>
+          <p id="suara-2" class="font-poppins text-xs font-bold text-gray-500 mt-1 uppercase tracking-wider">MENGHITUNG...</p>
+        </div>
       </div>
 
-      <!-- KOTAK KOSONG CARD (MINIMALIS) -->
-      <div class="relative bg-white/90 backdrop-blur-md rounded-[30px] p-8 shadow-xl flex flex-col items-center text-center transform hover:-translate-y-2 transition-all border-b-4 border-[#332277] mt-4 w-full">
-        <h2 class="font-poppins font-black text-2xl md:text-3xl text-[#332277] uppercase tracking-wider">
-          Kotak Kosong
-        </h2>
-        <div class="my-4 w-full h-[1px] bg-[#332277]/10"></div>
-        <div id="persen-kotak" class="font-poppins font-black text-5xl md:text-6xl text-[#E47CB8]">
-          0%
+      <div class="relative bg-white/90 backdrop-blur-md rounded-[30px] p-8 shadow-xl flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-all border-b-4 border-[#332277] w-full min-h-[380px]">
+        <div class="w-full flex-1 flex flex-col items-center justify-center">
+          <h2 class="font-poppins font-black text-2xl md:text-3xl text-[#332277] uppercase tracking-wider">
+            Kotak Kosong
+          </h2>
+          <div class="my-4 w-full h-[1px] bg-[#332277]/10"></div>
         </div>
-        <p id="suara-kotak" class="font-poppins text-xs font-bold text-gray-500 mt-2 uppercase tracking-widest">
-          0 SUARA DARI TOTAL
-        </p>
+
+        <div class="w-full flex-1 flex flex-col items-center justify-center pb-2">
+          <div id="persen-kotak" class="font-poppins font-black text-4xl md:text-5xl text-[#E47CB8]">0%</div>
+          <p id="suara-kotak" class="font-poppins text-xs font-bold text-gray-500 mt-2 uppercase tracking-wider">0 SUARA DARI TOTAL</p>
+        </div>
       </div>
 
     </div>
 
-    <!-- FOOTER -->
+    <div class="mt-4 flex flex-col items-center z-10">
+      <a href="docs/transparansi-suara.pdf" target="_blank" class="inline-flex items-center gap-3 bg-[#332277] hover:bg-[#9448B0] text-white font-poppins font-bold text-sm md:text-base px-8 py-3.5 rounded-full shadow-2xl border-2 border-[#D8F878] transition-all duration-300 hover:scale-105">
+        <svg class="w-6 h-6 text-[#D8F878]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Lihat Transparansi Suara (PDF)
+      </a>
+      <p class="text-white/80 font-poppins text-xs mt-2 text-center">
+        *Klik untuk melihat rincian bobot dan perhitungan suara resmi.
+      </p>
+    </div>
+
     <footer class="flex flex-col justify-start items-center w-full mt-8 border-t border-white/20 pt-8 z-10 relative">
       <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 md:gap-8 mb-8 w-full max-w-3xl">
         <a href="https://www.instagram.com/pemilu.ukmr2026/" target="_blank" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
