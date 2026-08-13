@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // WAKTU BUKA HASIL: 17 Agustus 2026 Pukul 06:00:00 WIB
-  const targetWaktuBuka = new Date(2026, 7, 19, 6, 0, 0).getTime();
+  const targetWaktuBuka = new Date(2026, 7, 13, 6, 0, 0).getTime();
 
   const envelopeTitle = document.getElementById("envelope-title");
   const envelopeSubtitle = document.getElementById("envelope-subtitle");

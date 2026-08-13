@@ -1,7 +1,7 @@
 // === KONFIGURASI WAKTU PEMILU ===
 // Sesuaikan dengan jadwal asli Pemilu UKMR 2026 Anda
-const WAKTU_MULAI = new Date('2026-08-03T00:00:00').getTime();
-const WAKTU_SELESAI = new Date('2026-08-04T23:59:59').getTime(); // Contoh: Berakhir jam 5 sore
+const WAKTU_MULAI = new Date('2026-08-12T00:00:00').getTime();
+const WAKTU_SELESAI = new Date('2026-08-05T23:59:59').getTime(); // Contoh: Berakhir jam 5 sore
 
 async function fetchCandidates() {
   const token = localStorage.getItem('user_token'); // Menyesuaikan token pemilih mahasiswa Anda sebelumnya
