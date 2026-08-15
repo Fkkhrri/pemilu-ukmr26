@@ -11,21 +11,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// ==========================================
-// 1. KONEKSI POSTGRESQL (SUPABASE)
-// ==========================================
+
 const db = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS, // Pastikan di .env namanya DB_PASSWORD
-  database: process.env.DB_DATABASE,     // Pastikan di .env namanya DB_NAME
-  port: process.env.DB_PORT || 6543, // Gunakan port 6543 untuk Transaction Pooler
+  password: process.env.DB_PASS, 
+  database: process.env.DB_DATABASE, 
+  port: process.env.DB_PORT || 6543,
   ssl: { rejectUnauthorized: false }
 });
 
-// ==========================================
-// 2. MIDDLEWARE AUTENTIKASI
-// ==========================================
 function auth(req, res, next) {
   const bearer = req.headers.authorization;
   if (!bearer) return res.status(401).json({ message: 'Token hilang atau tidak disertakan' });
@@ -46,9 +41,6 @@ function adminOnly(req, res, next) {
   next();
 }
 
-// ==========================================
-// 3. ENDPOINT LOGIN USER (MAHASISWA)
-// ==========================================
 app.post('/api/login', async (req, res) => {
     const { nim, password } = req.body;
     try {
@@ -73,7 +65,7 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ message: 'Password salah' });
         }
 
-        // 4. JIKA BENAR, BUAT TOKEN (Bagian ini yang mungkin hilang di kode Anda)
+        // 4. Jika cocok, buat token JWT
         const token = jwt.sign(
             { id: user.id, role: 'user' }, 
             process.env.JWT_SECRET, 
@@ -89,9 +81,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// ==========================================
-// 4. ENDPOINT LOGIN ADMIN
-// ==========================================
 app.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -103,16 +92,10 @@ app.post('/api/admin/login', async (req, res) => {
 
         const admin = result.rows[0];
 
-        // 1. KITA CETAK DULU ISI DATABASE-NYA KE TERMINAL
         console.log("Data admin dari DB:", admin);
 
-        // 2. PASTIKAN NAMA KOLOMNYA BENAR
-        // Jika di console.log terminal nama kolom sandinya 'password', maka gunakan admin.password
-        // Jika namanya 'password_hash', maka gunakan admin.password_hash
-        // Silakan sesuaikan baris di bawah ini dengan nama kolom di database Anda:
-        const hashDariDatabase = admin.password_hash; // <--- CEK BAGIAN INI
+        const hashDariDatabase = admin.password_hash;
 
-        // 3. BANDINGKAN
         const isMatch = await bcrypt.compare(password, hashDariDatabase);
         
         console.log("Hasil pencocokan sandi Admin:", isMatch);
@@ -120,8 +103,6 @@ app.post('/api/admin/login', async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: 'Password salah' });
         }
-
-        // 4. BUAT TIKET/TOKEN JIKA SUKSES
         const token = jwt.sign(
             { id: admin.id, role: 'admin' }, 
             process.env.JWT_SECRET, 
@@ -136,9 +117,6 @@ app.post('/api/admin/login', async (req, res) => {
     }
 });
 
-// ==========================================
-// 5. ENDPOINT DATA KANDIDAT & VOTING
-// ==========================================
 app.get('/api/candidates', auth, async (req, res) => {
   try {
     const result = await db.query('SELECT id, nama, foto_url, visi FROM candidates');
@@ -150,19 +128,16 @@ app.get('/api/candidates', auth, async (req, res) => {
 });
 
 app.post('/api/vote', auth, async (req, res) => {
-  // 1. Ambil candidate_id dari request body (tangkap versi tanpa 's' MAUPUN pake 's')
   const rawCandidateId = req.body.candidate_id || req.body.candidates_id;
   const candidateId = parseInt(rawCandidateId, 10);
   const userId = req.user.id;
 
-  // Validasi jika candidate_id tidak terisi/NaN
   if (!candidateId || isNaN(candidateId)) {
     console.error("Gagal Vote: candidate_id bernilai invalid:", req.body);
     return res.status(400).json({ message: 'Kandidat tidak valid' });
   }
 
   try {
-    // 2. Cek status vote SEKALIGUS ambil nilai 'bobot' user dari tabel users
     const userCheck = await db.query('SELECT has_voted, bobot FROM users WHERE id = $1', [userId]);
     
     if (userCheck.rows.length === 0) {
@@ -173,16 +148,13 @@ app.post('/api/vote', auth, async (req, res) => {
       return res.status(400).json({ message: 'Anda sudah pernah memilih!' });
     }
 
-    // Ambil nilai bobot user (jika null di DB, set default ke 0.25)
     const userBobot = parseFloat(userCheck.rows[0].bobot) || 0.25;
 
-    // 3. Masukkan ke tabel votes (simpan user_id, candidates_id, dan bobot suara)
     await db.query(
       'INSERT INTO votes (user_id, candidates_id, bobot) VALUES ($1, $2, $3)',
       [userId, candidateId, userBobot]
     );
 
-    // 4. Tandai user sudah memilih
     await db.query('UPDATE users SET has_voted = true WHERE id = $1', [userId]);
 
     res.json({ message: 'Voting berhasil!' });
@@ -192,14 +164,8 @@ app.post('/api/vote', auth, async (req, res) => {
   }
 });
 
-// ==========================================
-// 6. ENDPOINT STATISTIK (DASHBOARD & HASIL)
-// ==========================================
-// Catatan: Endpoint ini bisa diakses secara publik atau dilindungi tergantung kebutuhan.
-// Jika file hasil.html bersifat publik, hapus middleware `auth` dan `adminOnly`.
 app.get('/api/admin/stats', async (req, res) => {
   try {
-    // 1. Ambil Total Pemilih & Sudah Memilih
     const userStats = await db.query(`
       SELECT 
         COUNT(*) AS total_pemilih,
@@ -207,7 +173,6 @@ app.get('/api/admin/stats', async (req, res) => {
       FROM users
     `);
 
-    // 2. Ambil Suara per Kandidat (Query Aman & Standar)
     const candidateStats = await db.query(`
       SELECT 
         c.id, 
@@ -234,14 +199,11 @@ app.get('/api/admin/stats', async (req, res) => {
   }
 });
 
-// Endpoint publik untuk halaman Hasil Pemilu
 app.get('/api/public/results', async (req, res) => {
   try {
-    // 1. Total nilai bobot suara yang masuk
     const totalRes = await db.query('SELECT COALESCE(SUM(bobot), 0)::float AS total_nilai FROM votes');
     const totalNilaiSuara = parseFloat(totalRes.rows[0].total_nilai) || 0;
 
-    // 2. Total nilai bobot per kandidat
     const candidateRes = await db.query(`
       SELECT 
         c.id, 
@@ -254,8 +216,8 @@ app.get('/api/public/results', async (req, res) => {
     `);
 
     res.json({
-      total_suara: totalNilaiSuara, // Menghasilkan misal: 125.75
-      kandidat: candidateRes.rows   // Menghasilkan misal: Khairul 80.5, Kotak Kosong 45.25
+      total_suara: totalNilaiSuara,
+      kandidat: candidateRes.rows
     });
   } catch (err) {
     console.error(err);

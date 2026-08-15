@@ -1,10 +1,8 @@
-// === KONFIGURASI WAKTU PEMILU ===
-// Sesuaikan dengan jadwal asli Pemilu UKMR 2026 Anda
-const WAKTU_MULAI = new Date('2026-08-12T00:00:00').getTime();
-const WAKTU_SELESAI = new Date('2026-08-15T23:59:59').getTime(); // Contoh: Berakhir jam 5 sore
+const WAKTU_MULAI = new Date('2026-08-18T00:00:00').getTime();
+const WAKTU_SELESAI = new Date('2026-08-18T23:59:59').getTime();
 
 async function fetchCandidates() {
-  const token = localStorage.getItem('user_token'); // Menyesuaikan token pemilih mahasiswa Anda sebelumnya
+  const token = localStorage.getItem('user_token');
   
   try {
     const res = await fetch('/api/candidates', {
@@ -20,11 +18,10 @@ async function fetchCandidates() {
 
 function renderCandidates(candidates) {
   const container = document.getElementById('kandidatContainer');
-  container.innerHTML = ''; // Bersihkan container terlebih dahulu
+  container.innerHTML = ''; 
 
   candidates.sort((a, b) => a.id - b.id);
 
-  // Atur layout grid/flex
   if (candidates.length === 2) {
     container.className = 'flex justify-center gap-8 flex-wrap z-10 px-6 w-full';
   } else {
@@ -34,11 +31,8 @@ function renderCandidates(candidates) {
   candidates.forEach(c => {
     const card = document.createElement('div');
 
-    // ==========================================
-    // 1. JIKA KANDIDAT ADALAH KOTAK KOSONG (ID = 4)
-    // ==========================================
+    // 1. JIKA KANDIDAT ADALAH KOTAK KOSONG
     if (c.id === 4 || (c.nama && c.nama.toLowerCase().includes('kotak'))) {
-      // Tambahkan min-h-[350px] agar tinggi kartunya tetap seimbang dengan kartu Khairul
       card.className = 'bg-white rounded-[40px] p-8 shadow-xl flex flex-col items-center justify-center text-center transition-transform hover:scale-105 mt-8 w-[300px] md:w-[350px] min-h-[350px]';
       
       card.innerHTML = `
@@ -60,9 +54,7 @@ function renderCandidates(candidates) {
         </button>
       `;
     } 
-    // ==========================================
-    // 2. JIKA KANDIDAT NORMAL (KHAIRUL DLL)
-    // ==========================================
+    // 2. JIKA KANDIDAT NORMAL
     else {
       card.className = 'bg-[#F0EFEB] rounded-[40px] p-8 shadow-2xl flex flex-col items-center text-center transition-transform hover:scale-105 border border-white/20 mt-8 w-[300px] md:w-[350px]';
 
@@ -92,11 +84,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   let candidatesData = [];
   let isRendered = false;
 
-  // Cek berkala kondisi waktu setiap 1 detik
   setInterval(async () => {
     const sekarang = new Date().getTime();
 
-    // Kondisi 1: Masih Masa Tunggu / Countdown Mulai
+    // Kondisi 1: Masih Masa Tunggu
     if (sekarang < WAKTU_MULAI) {
       container.innerHTML = `
         <div class="col-span-full text-center py-12">
@@ -108,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } 
     // Kondisi 2: Masa Voting Berlangsung
     else if (sekarang >= WAKTU_MULAI && sekarang <= WAKTU_SELESAI) {
-      // Pastikan innerHTML HANYA dieksekusi sekali di awal
       if (!isRendered) { 
         container.innerHTML = `
           <div class="col-span-full text-center py-12">
@@ -117,7 +107,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             </p>
           </div>`;
           
-        // Ambil data dari backend hanya saat gerbang voting baru terbuka
         fetchCandidates().then(data => {
             renderCandidates(data);
         });
@@ -136,13 +125,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }, 1000);
 
-  // === Aksi Kirim Suara (Voting) ===
   container.addEventListener('click', async e => {
-    // Ambil elemen tombol yang diklik (mencakup jika mengeklik teks di dalam tombol)
     const btn = e.target.closest('.voteBtn');
     if (!btn) return;
     
-    // PARSE MENJADI INTEGER (Angka)
     const candidate_id = parseInt(btn.dataset.id, 10);
     
     if (isNaN(candidate_id)) {
@@ -150,7 +136,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    // Cek apakah user sudah login & memiliki token
     const token = localStorage.getItem('user_token');
     if (!token) {
       alert('Sesi login telah berakhir. Silakan login kembali.');
@@ -161,12 +146,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!confirm('Yakin memilih kandidat ini? Pilihan Anda tidak dapat diubah kembali.')) return;
 
     try {
-      // Panggil Endpoint API Voting
       const res = await fetch('/api/vote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Mengirimkan token bukti login user
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ 
           candidate_id: candidate_id 

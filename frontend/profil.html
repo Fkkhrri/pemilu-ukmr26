@@ -19,7 +19,6 @@
       margin: 0;
       min-height: 100vh; 
       overflow-x: hidden;
-      /* Background konsisten dengan halaman awal */
       background: linear-gradient(rgba(183, 219, 104, 0.4), rgba(0, 0, 0, 0.9)), url('images/IMG_1308.JPEG');
       background-size: cover;
       background-position: center;
@@ -33,15 +32,11 @@
 
 <body class="flex flex-col items-center pt-28 pb-10 px-4 relative">
 
- <!-- MENU NAVIGASI -->
 <nav class="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-50 flex items-start justify-between pointer-events-none">
   
-  <!-- CONTAINER BAR UNGU (Home, Profil, Hasil, Helpdesk) -->
   <div class="bg-[#332277] rounded-2xl md:rounded-full shadow-lg p-2 md:p-1.5 transition-all duration-300 pointer-events-auto w-full md:w-auto">
     
-    <!-- TAMPILAN MOBILE (HP) -->
     <div class="flex items-center justify-between w-full md:hidden px-2 py-1">
-      <!-- Tombol Garis 3 (Kiri) -->
       <button id="menu-toggle" class="text-white focus:outline-none p-1.5 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle Menu">
         <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
@@ -51,13 +46,11 @@
         </svg>
       </button>
 
-      <!-- Nama Halaman Aktif (Kanan) -->
       <span class="text-[#FFFFFF] font-poppins font-extrabold text-sm tracking-wide uppercase">
         Profil Kandidat
       </span>
     </div>
 
-    <!-- DAFTAR MENU UTAMA -->
     <div id="menu-list" class="hidden md:flex flex-col md:flex-row items-stretch md:items-center gap-1 mt-3 md:mt-0 pt-2 md:pt-0 border-t border-white/10 md:border-none">
       
       <a href="index.html" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors">
@@ -72,12 +65,10 @@
         <span class="text-white text-sm md:text-base font-bold font-poppins">Hasil</span>
       </a>
 
-      <!-- HELPDESK (Direct ke Spreadsheet) -->
       <a href="https://docs.google.com/spreadsheets/d/1rsIvVv4W07cywiBLITD6IyNFMIIVMXzHTRx2HSC77Q4/edit?hl=id&gid=0#gid=0" target="_blank" class="px-4 py-2 rounded-xl md:rounded-full flex justify-start md:justify-center items-center hover:bg-white/10 transition-colors text-[#FFFFFF]">
         <span class="text-sm md:text-base font-bold font-poppins">Helpdesk</span>
       </a>
 
-      <!-- MENU LOGIN (Hanya Tampil di Dalam Garis 3 saat Layar HP) -->
       <a href="login.html" class="md:hidden px-4 py-2 rounded-xl flex justify-start items-center hover:bg-white/10 transition-colors border border-white/20 mt-2 bg-white/5">
         <span class="text-white text-sm font-bold font-poppins">Login</span>
       </a>
@@ -86,7 +77,6 @@
 
   </div>
 
-  <!-- TOMBOL LOGIN TERPISAH (Hanya Tampil di Kanan Atas PC) -->
   <a href="login.html" class="hidden md:flex pointer-events-auto bg-[#332277] hover:bg-[#9448B0] text-white px-6 py-2.5 rounded-full shadow-lg border border-white/20 transition-all duration-300 hover:scale-105 items-center justify-center">
     <span class="text-sm md:text-base font-bold font-poppins">Login</span>
   </a>
@@ -131,7 +121,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center px-4 mt-4 text-[#9448B0] font-poppins font-medium text-lg">
-                <span class="underline decoration-[#9448B0]">DRAF</span>
+                <a href="docs/Khairul_Arief_Rahman.pdf" target="_blank" class="underline decoration-[#9448B0]">DRAF</a>
                 <a href="https://www.instagram.com/rularieff_/" target="_blank" class="underline decoration-[#9448B0]">@rularieff_</a>
             </div>
         </div>
@@ -200,7 +190,6 @@
 
   </div>
   <script>
-    // Toggle menu untuk tampilan mobile
     const menuToggle = document.getElementById('menu-toggle');
     const menuList = document.getElementById('menu-list');
     const iconOpen = document.getElementById('icon-open');

@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Unbounded:wght@500&display=swap" rel="stylesheet">
   
   <style>
-    /* Latar belakang & Efek */
     body {
       margin: 0;
       min-height: 100vh;
@@ -58,18 +57,17 @@
   </div>
 
   <script>
-    // === Countdown Timer ===
     const countdownElement = document.getElementById('countdown');
 
 // Samakan dengan waktu di vote.js
 // Samakan dengan waktu di vote.js
-const MULAI = new Date('2026-08-12T00:00:00').getTime();
-const SELESAI = new Date('2026-08-15T23:59:59').getTime();
+const MULAI = new Date('2026-08-18T00:00:00').getTime();
+const SELESAI = new Date('2026-08-18T23:59:59').getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
 
-  // Kondisi 1: Belum mulai (Tampilkan Hitung Mundur Menuju Mulai)
+  // Kondisi 1: Belum mulai
   if (now < MULAI) {
     const distance = MULAI - now;
     const d = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -77,7 +75,6 @@ function updateCountdown() {
     const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const s = Math.floor((distance % (1000 * 60)) / 1000);
     
-    // FORMAT BARU: Hari:Jam:Menit:Detik (Contoh: 38:02:26:00)
     countdownElement.textContent = `${d.toString().padStart(2,'0')}:${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
   } 
   // Kondisi 2: Sedang berlangsung
@@ -90,11 +87,9 @@ function updateCountdown() {
   }
 }
 
-// Jalankan fungsi sekali di awal agar tidak kosong saat halaman dimuat
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-    // === Efek Kotak Statik ===
     const group = document.getElementById("group");
     function createStaticSquares() {
       group.innerHTML = "";

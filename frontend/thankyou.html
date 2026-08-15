@@ -17,14 +17,12 @@
       justify-content: center;
       padding: 2rem;
       font-family: 'Poppins', sans-serif;
-      /* Background konsisten */
       background: linear-gradient(rgba(183, 219, 104, 0.4), rgba(0, 0, 0, 0.9)), url('images/IMG_1308.JPEG');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
 
-    /* Animasi Centang */
     .checkmark {
       width: 120px;
       height: 120px;
@@ -55,7 +53,6 @@
 </head>
 
 <body>
-  <!-- Efek Latar Kotak Statik -->
   <div id="group" class="fixed inset-0 pointer-events-none z-0"></div>
 
   <main class="relative z-10 bg-[#F0EFEB] rounded-[30px] shadow-2xl p-10 max-w-lg w-full text-center transform transition-all duration-300">
@@ -81,7 +78,6 @@
   </main>
 
   <script>
-    // Efek Kotak Latar
     const group = document.getElementById("group");
     function createSquares() {
       const sSize = 60;
@@ -97,7 +93,6 @@
     }
     createSquares();
 
-    // Logout
     document.getElementById('backBtn').addEventListener('click', () => {
       localStorage.removeItem('token');
       window.location.href = 'login.html';

@@ -1,10 +1,8 @@
-// --- Logout ---
 document.getElementById('logoutBtn')?.addEventListener('click', () => {
   localStorage.removeItem('admin_token');
   window.location.href = 'admin-login.html';
 });
 
-// Ambil data statistik dari server
 async function fetchAdminStats() {
   const token = localStorage.getItem('admin_token');
   if (!token) {
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const stats = await fetchAdminStats();
   if (!stats) return;
 
-  // --- PIE CHART 1: Status Partisipasi Pemilih ---
   const ctx1 = document.getElementById('totalVoterChart')?.getContext('2d');
   if (ctx1) {
     const belum = stats.total_pemilih - stats.sudah_memilih;
@@ -77,15 +74,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // --- PIE CHART 2: Suara Kandidat ---
   const ctx2 = document.getElementById('candidateChart')?.getContext('2d');
   if (ctx2 && stats.kandidat) {
     
-    // Ambil nama dan pastikan jumlah suara dikonversi ke Angka (Number)
     const labelsList = stats.kandidat.map(k => k.nama);
     const suaraList = stats.kandidat.map(k => Number(k.suara || k.jumlah_suara || 0));
 
-    // Jika belum ada suara sama sekali, cegah chart jadi blank
     const totalSuaraMasuk = suaraList.reduce((a, b) => a + b, 0);
 
     new Chart(ctx2, {

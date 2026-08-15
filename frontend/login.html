@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - PEMILU UKMR</title>
   
-  <!-- Font Poppins & Unbounded -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Unbounded:wght@500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* Kotak-kotak atas & bawah menggunakan warna Neon Lime dari palet */
     .square {
       background: #D8F878;
       position: absolute;
@@ -23,7 +21,6 @@
       margin: 0;
       min-height: 100vh; 
       overflow-x: hidden;
-      /* Background konsisten dengan halaman sebelumnya */
       background: linear-gradient(rgba(183, 219, 104, 0.4), rgba(0, 0, 0, 0.9)), url('images/IMG_1308.JPEG');
       background-size: cover;
       background-position: center;
@@ -46,30 +43,22 @@
 
 <body class="flex flex-col items-center justify-center min-h-screen px-4 py-24 relative">
 
-  <!-- MENU NAVIGASI (KEMBALI) -->
   <nav class="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center p-2 bg-[#332277] rounded-full shadow-lg whitespace-nowrap">
       <a href="index.html" class="px-5 py-2 rounded-full flex justify-center items-center hover:bg-[#E47CB8] transition-colors group">
           <span class="text-white text-[13px] md:text-[16px] font-bold font-poppins leading-none group-hover:text-[#001C3D]">← Kembali</span>
       </a>
   </nav>
 
-  <!-- ========================================== -->
-  <!-- WRAPPER UTAMA (Logo, Judul, & Form Login) -->
-  <!-- ========================================== -->
   <div class="relative z-10 w-full max-w-md flex flex-col items-center gap-8">
       
-      <!-- LOGO DAN JUDUL DI TENGAH (Lebih Kecil dari index.html) -->
       <div class="flex flex-col items-center gap-4 w-full">
-          <!-- Logo -->
           <img src="images/logo bg transparent.png" alt="Logo UKMR" 
                class="w-[140px] h-[140px] md:w-[180px] md:h-[180px] object-cover">
           
-          <!-- Judul Typografi Canva -->
           <img src="images/Pemilu U KMR 2 026.png" alt="Judul Pemilu UKMR 2026" 
                class="w-[85%] max-w-[320px] md:max-w-[400px] object-contain">
       </div>
 
-      <!-- KARTU LOGIN -->
       <div class="w-full bg-[#F0EFEB] rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col gap-8 ...">
          <h2 class="text-[#332277] text-2xl md:text-3xl font-poppins font-extrabold text-center leading-tight">
             Masuk
@@ -101,24 +90,20 @@
 
     <footer class="flex flex-col justify-start items-center w-full mt-8 border-t border-white/20 pt-8 z-10 relative">
         
-        <!-- List Link/Kontak -->
         <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 md:gap-8 mb-10 w-full max-w-3xl">
             
             <a href="https://www.instagram.com/pemilu.ukmr2026/" target="_blank" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
-                <!-- Icon Instagram -->
                 <img src="images/Icon.png" alt="Instagram" class="w-6 h-6 object-contain">
                 <span class="border-b border-[#F0EFEB] text-[#F0EFEB] text-xs font-poppins font-normal leading-[15px]">PEMILU UKMR ITB 2026</span>
             </a>
             
             <a href="https://www.instagram.com/ukmr_itb/" target="_blank" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
-                <!-- Icon Instagram -->
                 <img src="images/Icon.png" alt="Instagram" class="w-6 h-6 object-contain">
                 <span class="border-b border-[#F0EFEB] text-[#F0EFEB] text-xs font-poppins font-normal leading-[15px]">UKMR ITB</span>
             </a>
 
         </div>
 
-        <!-- Copyright -->
         <div class="text-center text-[#F0EFEB] text-xs font-poppins font-bold leading-4 tracking-wide pb-4">
             © 2026 Copyright: Divisi IT PEMILU UKMR ITB 2026
         </div>
