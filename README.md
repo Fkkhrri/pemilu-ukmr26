@@ -29,7 +29,7 @@ Sistem E-Voting berbasis web yang modern, aman, dan responsif untuk pemilihan um
 
 ---
 
-## 🎨 Palet Warna & Desain (*Mindful Palette No.202*)
+## 🎨 Palet Warna & Desain
 
 | Elemen | Kode Hex |
 | :--- | :--- |
@@ -69,6 +69,8 @@ pemilu-ukmr26/
 │   ├── admin.html              # Halaman Dashboard Admin
 │   └── admin.js                # Handler visualisasi Chart.js admin
 └── README.md
+```
+---
 
 # 🗄️ Skema Database (PostgreSQL / Supabase)
 
