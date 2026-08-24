@@ -1,5 +1,5 @@
 const WAKTU_MULAI = new Date('2026-08-18T00:00:00').getTime();
-const WAKTU_SELESAI = new Date('2026-08-23T23:59:59').getTime();
+const WAKTU_SELESAI = new Date('2026-08-25T23:59:59').getTime();
 
 async function fetchCandidates() {
   const token = localStorage.getItem('user_token');
