@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const targetWaktuBuka = new Date(2026, 7, 26, 6, 0, 0).getTime();
+  const targetWaktuBuka = new Date(2026, 7, 28, 6, 0, 0).getTime();
 
   const envelopeTitle = document.getElementById("envelope-title");
   const envelopeSubtitle = document.getElementById("envelope-subtitle");
